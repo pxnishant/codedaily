@@ -1,8 +1,8 @@
-# React + Vite
+# CodeDaily
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a project that I'm very enthusiastic about.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Goal
+To make a website that emails you one or more LeetCode questions daily, based on the difficulty, topics, and number of questions that you have chosen.
+## Status
+Currently building.
