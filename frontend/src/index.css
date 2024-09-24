@@ -10,27 +10,145 @@
   --gray-9:#6e6e6e;
   --gray-10:#7b7b7b;
   --gray-11:#b4b4b4;
-  --gray-12:#eee
+  --gray-12:#eee;
+
+  --input-focus: #2d8cf0;
+  --font-color: #323232;
+  --font-color-sub: #666;
+  --bg-color: beige;
+  --main-color: black;
+  padding: 20px;
+  --lb: lightblue;
+  --pp: #875ad1;
 }
 
 * {
   padding: 0px;
   margin: 0px;
-  font-family: sans-serif;
+  font-family: 'Inter', sans-serif;
+  box-sizing: border-box;
   /* border: 1px solid black !important; */
 }
 
-
-body {
-  background-color: var(--gray-2);
-  color: var(--gray-10);
-  transition: 0.5s;
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-color);
+  color: var(--font-color);
 }
 
-.information {
+.logo {
+  font-style: italic;
+  font-size: 18px;
+  width: 10%;
+  text-align: center;
+  font-weight: 900;
+  padding: 6px;
+  border: 2px solid var(--main-color);
+  box-shadow: 4px 4px var(--main-color);
+  min-width: 130px;
+  margin: 20px;
+}
+
+.logo:hover {
+
+  background-color: var(--lb);
+
+}
+
+main {
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+
+}
+
+.main-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
   align-items: center;
-  margin-top: 40px;
+  flex-wrap: wrap;
+  padding-top: 30px;
+}
+
+
+.faq-section {
+  
+  display: flex;
+  flex-direction: column;
+  max-width: 30%;
+  height: 100%;
+  justify-content: center;
+
+}
+
+.login-component {
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  border-radius: 5px;
+  border: 2px solid var(--main-color);
+  background-color: var(--bg-color);
+  box-shadow: 4px 4px var(--main-color);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--font-color);
+  cursor: pointer;
+  padding: 10px;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: var(--lb);
+  
+}
+
+.title {
+  color: var(--gray-12);
+  font-weight: 700;
+  font-size: 20px;
+  margin-bottom: 15px;
+  text-align: center;
+  color: var(--main-color);
+
+} 
+
+.answer {
+  margin-bottom: 30px;
+  border-radius: 5px;
+  padding: 15px;
+  border: 2px solid var(--main-color);
+  background-color: var(--lb);
+  box-shadow: 4px 4px var(--main-color);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--main-color);
+}
+
+@media only screen and (max-width: 766px) {
+
+  .faq-section {
+    max-width: 70%;
+    order: 2;
+    padding-top: 20px;
+  }
+
+  .title {
+    font-size: 17px;
+  }
+
+  .answer {
+
+    font-size: 14px;
+
+  }
+
+  .login-component {
+    padding-top: 30px;
+  }
+
 }
