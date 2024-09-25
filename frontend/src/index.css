@@ -84,7 +84,7 @@ main {
 
 }
 
-.login-component {
+.button-div {
   display: flex;
   flex-direction: column;
 }
@@ -150,5 +150,13 @@ button:hover {
   .login-component {
     padding-top: 30px;
   }
+
+}
+
+.auth {
+
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 
 }

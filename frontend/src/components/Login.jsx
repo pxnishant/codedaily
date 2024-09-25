@@ -1,10 +1,18 @@
 import React from 'react';
 
-export default function Login() {
+export default function Login({title}) {
+
+	const googleAuth = () => {
+		window.open(
+			`${import.meta.env.VITE_API_URL}/auth/google/`,
+			"_self"
+		);
+	};
+
+
   return (
-    <div className="login-component">
-        <div className="title">Your email is safe (Just trust me)<br/></div>
-        <button>Login using Google →</button>
+    <div className="button-div">
+        <button onClick = {googleAuth}>{title}</button>
     </div>
   );
 }

@@ -1,21 +1,34 @@
-import Header from './components/Header.jsx'
-import Faq from './components/Faq.jsx'
-import Login from './components/Login.jsx'
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import AfterLogin from './components/AfterLogin.jsx';
+import BeforeLogin from './components/BeforeLogin.jsx';
 
 function App() {
-  return (
-    <main>
-      <Header/>
-      <div className="main-content">
-        <div className='faq-section'>
-          <Faq title = "Why does this website do?" content = "This website emails you one or more LeetCode questions daily, depending on the difficulty and topics that you select."/>
-          <Faq title = "How are these questions picked?" content = "Questions have been picked among the 500 most-liked questions on LeetCode."/>
-          <Faq title = "Is it free?" content = "It's absolutely free. I'm also working on integrating Codeforces, it will be available soon."/>
-        </div>
-          <Login/>
-      </div>
-    </main>
 
+	const [user, setUser] = useState(null);
+
+	const getUser = async () => {
+		try {
+			const url = `${import.meta.env.VITE_API_URL}/auth/login/success`;
+			const { data } = await axios.get(url, { withCredentials: true });
+			setUser(data.user._json);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	useEffect(() => {
+		getUser();
+	}, []);
+
+  return (
+    <Routes>
+      <Route
+        path="/"
+        element={user ? <AfterLogin user={user} /> : <BeforeLogin />}
+      />
+    </Routes>
   );
 }
 
