@@ -12,7 +12,7 @@ export default function Login({title}) {
 
   return (
     <div className="button-div">
-        <button onClick = {googleAuth}>{title}</button>
+        <button className='lg-bt' onClick = {googleAuth}>{title}</button>
     </div>
   );
 }

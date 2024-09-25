@@ -11,7 +11,7 @@ export default function Signup({title}) {
 
   return (
     <div className="button-div">
-    <button onClick = {googleAuth}>{title}</button>
+    <button className = 'sg-bt' onClick = {googleAuth}>{title}</button>
     </div>
   );
 }
