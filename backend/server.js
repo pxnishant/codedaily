@@ -24,7 +24,7 @@ app.use(
             keys: ["codedaily"],
             maxAge: 24 * 60 * 60 * 1000,
             secure: true,
-            sameSite: 'none'
+            sameSite: 'None'
         }
 
     )
@@ -37,10 +37,6 @@ app.use(cors({
     origin: process.env.CLIENT_URL,
     methods: "GET,POST,PUT,PATCH,DELETE,OPTIONS",
     credentials: true,
-    allowedHeaders: ["Content-Type", "Authorization"],
-    exposedHeaders: ["Content-Length", "X-My-Custom-Header"],
-    maxAge: 3600,
-    optionsSuccessStatus: 200,
 }));
 
 
