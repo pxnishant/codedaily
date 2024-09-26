@@ -1,6 +1,7 @@
 import express from 'express'
 import dotenv from 'dotenv';
 import cookieSession from 'cookie-session';
+import session from 'express-session';
 import passport from 'passport';
 import cors from 'cors'
 import authRoute from "./routes/auth.js"
@@ -12,26 +13,8 @@ import mongoose from 'mongoose'
 import User from './database/User.js'
 
 mongoose.connect(process.env.MONGODB_URI)
-
-const app = express()
 const PORT = process.env.PORT || 8080;
-app.use(express.json());
-app.set('trust proxy', 1)
-app.use(
-    cookieSession(
-        {
-            name: "session",
-            keys: ["codedaily"],
-            maxAge: 24 * 60 * 60 * 1000,
-            secure: true,
-            sameSite: 'None'
-        }
-
-    )
-);
-
-app.use(passport.initialize());
-app.use(passport.session());
+const app = express()
 
 app.use(cors({
     origin: process.env.CLIENT_URL,
@@ -39,6 +22,34 @@ app.use(cors({
     credentials: true,
 }));
 
+app.set('trust proxy', 1)
+app.use(session({
+  secret: 'dsdsds cat',
+  resave: false,
+  saveUninitialized: true,
+//   cookie: { secure: true }
+}))
+
+
+// app.set('trust proxy', 1)
+// app.use(
+//     cookieSession(
+//         {
+//             name: "session",
+//             keys: ["codedaily"],
+//             maxAge: 24 * 60 * 60 * 1000,
+//             secure: true,
+//             sameSite: 'None'
+//         }
+
+//     )
+// );
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+app.use(express.json());
 
 app.use("/auth", authRoute)
 

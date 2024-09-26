@@ -32,7 +32,7 @@ router.get("/google/callback",
     })
 )
 
-router.get("/google", passport.authenticate("google", { scope : ['profile', 'email'] }));
+router.get("/google", passport.authenticate("google", { scope : ['profile', 'email'] }))
 
 router.get("/logout", (req, res) => {
 	req.logout();

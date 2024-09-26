@@ -13,6 +13,7 @@ passport.use(
             clientSecret: process.env.CLIENT_SECRET,
             callbackURL: "/auth/google/callback",
             scope: ["profile", "email"],
+            // passReqToCallback: true
         },
         function (accessToken, refreshToken, profile, callback) {
             return callback(null, profile);
