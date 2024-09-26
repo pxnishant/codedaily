@@ -22,12 +22,15 @@ app.use(cors({
     credentials: true,
 }));
 
-app.set('trust proxy', 1)
+app.set('trust proxy', true)
 app.use(session({
   secret: 'dsdsds cat',
   resave: false,
   saveUninitialized: true,
-//   cookie: { secure: true }
+  cookie: {
+    secure: true,
+    sameSite: "none", 
+}
 }))
 
 
