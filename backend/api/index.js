@@ -14,7 +14,7 @@ import User from '../database/User.js'
 mongoose.connect(process.env.MONGODB_URI)
 
 const app = express()
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
 app.use(
@@ -105,5 +105,9 @@ app.post('/updateuser', async (req, res) => {
     }
 });
 
+app.get("/", (req, res) => res.send("Running CodeDaily server."));
+
 
 app.listen(PORT, () => console.log(`Server running, port: ${PORT}`))
+
+export default app;
