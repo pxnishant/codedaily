@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import AfterLogin from './components/AfterLogin.jsx';
 import BeforeLogin from './components/BeforeLogin.jsx';
+import './index.css'
 
 function App() {
 
