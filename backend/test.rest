@@ -1,9 +1,7 @@
-POST http://localhost:8080/updateuser
+GET http://localhost:8080/getdata
 content-type: application/json
 
 {
-    "email": "vaishvi@gmail.com",
-    "difficulty": [false, false, false],
-    "topics": [false, true]
+    "email": "ppnishant@gmail.com"
 }
 

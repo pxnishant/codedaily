@@ -54,10 +54,48 @@ export default function AfterLogin(userDetails) {
           difficulty: difficulty,
           topics: topics
         })
-      }).then(() => console.log('request successfuly sent'))
+      }).then(() => console.log('request to update successfuly sent'))
       
     }
 
+    async function getData(email) {
+
+      try {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/getdata`, {
+
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'email': email
+          }
+        })
+
+        const data = await response.json();
+        
+        return data;
+      }
+
+      catch {
+        console.log('new user haha react')
+      }
+  }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getData(user.email);
+        if (data) {
+          console.log("ttttttt", data.difficulty)
+          setDifficulty(data.difficulty);
+          setTopics(data.topics);
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
 return (
   <div className ="auth-main">
@@ -69,13 +107,13 @@ return (
     </div>
     <div className ="auth-body">
       <div className = "questions">
-        <QuestionCard className = "qc" title = "Question 1" handleOnChangeD={handleOnChangeD} handleOnChangeT={handleOnChangeT} offset = {0} offset2 = {0}/>
-        <QuestionCard className = "qc" title = "Question 2" handleOnChangeD={handleOnChangeD} handleOnChangeT={handleOnChangeT}  offset = {3} offset2 = {8}/>
-        <QuestionCard className = "qc" title = "Question 3" handleOnChangeD={handleOnChangeD} handleOnChangeT={handleOnChangeT}  offset = {6} offset2 = {16}/>
+        <QuestionCard className = "qc" title = "Question 1" difficulty = {difficulty} topics = {topics} handleOnChangeD={handleOnChangeD} handleOnChangeT={handleOnChangeT} offset = {0} offset2 = {0}/>
+        <QuestionCard className = "qc" title = "Question 2" difficulty = {difficulty} topics = {topics} handleOnChangeD={handleOnChangeD} handleOnChangeT={handleOnChangeT}  offset = {3} offset2 = {8}/>
+        <QuestionCard className = "qc" title = "Question 3" difficulty = {difficulty} topics = {topics} handleOnChangeD={handleOnChangeD} handleOnChangeT={handleOnChangeT}  offset = {6} offset2 = {16}/>
       </div>
       <div className = "auth-header">
       <div className="button-div" id = "save-button">
-            <button onClick = {async () => {saveData(user.email, difficulty, topics)}}className = 'sv-bt'>Save Changes</button>
+            <button onClick = {async () => {saveData(user.email, difficulty, topics);}}className = 'sv-bt'>Save Changes</button>
       </div>
     </div>
     </div>
