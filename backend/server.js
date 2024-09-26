@@ -33,13 +33,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(cors({
-    origin: "http://localhost:5173",
-    methods: "GET,POST",
-    credentials: true,
-}));
-
-app.use(cors({
-    origin: "https://deploy-mern-",
+    origin: process.env.CLIENT_URL,
     methods: "GET,POST",
     credentials: true,
 
@@ -113,7 +107,7 @@ app.post('/updateuser', async (req, res) => {
 
 app.get('/', (req, res) => {
     res.send('CodeDaily server working perfectly!')
-})
+  })
   
 
 app.listen(PORT, () => console.log(`Server running, port: ${PORT}`))
