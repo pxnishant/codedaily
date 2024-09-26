@@ -34,11 +34,14 @@ app.use(passport.session());
 
 app.use(cors({
     origin: process.env.CLIENT_URL,
-    methods: "GET,POST",
+    methods: "GET,POST,PUT,PATCH,DELETE,OPTIONS",
     credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"],
+    exposedHeaders: ["Content-Length", "X-My-Custom-Header"],
+    maxAge: 3600,
+    optionsSuccessStatus: 200,
+}));
 
-    
-}))
 
 app.use("/auth", authRoute)
 
