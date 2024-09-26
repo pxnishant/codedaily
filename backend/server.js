@@ -39,7 +39,7 @@ app.use(cors({
 }));
 
 app.use(cors({
-    origin: "",
+    origin: "https://deploy-mern-",
     methods: "GET,POST",
     credentials: true,
 
@@ -111,5 +111,9 @@ app.post('/updateuser', async (req, res) => {
     }
 });
 
+app.get('/', (req, res) => {
+    res.send('CodeDaily server working perfectly!')
+})
+  
 
 app.listen(PORT, () => console.log(`Server running, port: ${PORT}`))
