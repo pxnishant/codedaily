@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import QuestionCard from './QuestionCard';
 import Header from './Header';
+import './Popup.css'
 export default function AfterLogin(userDetails) {
   const user = userDetails.user;
 
@@ -11,6 +12,19 @@ export default function AfterLogin(userDetails) {
       );
     };
     // console.log(user.email) , user.name, 
+
+    const [showPopup, setShowPopup] = useState(false);
+
+    function popUpButton () {
+
+      setShowPopup(true);
+
+      setTimeout(() => {
+        setShowPopup(false);
+      }, 3000);
+
+    };
+  
 
 
     const [difficulty, setDifficulty] = useState(new Array(9).fill(false))
@@ -112,8 +126,14 @@ return (
         <QuestionCard className = "qc" title = "Question 3" difficulty = {difficulty} topics = {topics} handleOnChangeD={handleOnChangeD} handleOnChangeT={handleOnChangeT}  offset = {6} offset2 = {16}/>
       </div>
       <div className = "auth-header">
+
       <div className="button-div" id = "save-button">
-            <button onClick = {async () => {saveData(user.email, difficulty, topics);}}className = 'sv-bt'>Save Changes</button>
+            <button onClick = {async () => {popUpButton(); saveData(user.email, difficulty, topics);}}className = 'sv-bt'>Save Changes</button>
+            {showPopup && (
+            <div className="retro-popup">
+              <p>Saved!</p>
+            </div>
+          )}
       </div>
     </div>
     </div>
