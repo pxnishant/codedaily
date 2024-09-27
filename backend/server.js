@@ -11,10 +11,21 @@ import passportStrategy from "./passport.js"
 
 import mongoose from 'mongoose'
 import User from './database/User.js'
+import connectMongoDBSession from 'connect-mongodb-session';
+
+const MongoDBStore = connectMongoDBSession(session);
+
+
 
 mongoose.connect(process.env.MONGODB_URI)
 const PORT = process.env.PORT || 8080;
 const app = express()
+
+const store = new MongoDBStore({
+    uri: process.env.MONGO_URI,
+    collection: 'sessions'
+  });
+  
 
 app.use(cors({
     origin: process.env.CLIENT_URL,
@@ -22,14 +33,18 @@ app.use(cors({
     credentials: true,
 }));
 
-app.set('trust proxy', true)
+app.set('trust proxy', 1)
+
 app.use(session({
   secret: 'dsdsds cat',
   resave: false,
   saveUninitialized: true,
+  store: store,
   cookie: {
+    maxAge: 365 * 24 * 60 * 60 * 1000,
     secure: true,
     sameSite: "none", 
+    httpOnly: true
 }
 }))
 

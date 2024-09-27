@@ -4,7 +4,7 @@ export default function Signup({title}) {
 
 	const googleAuth = () => {
 		window.open(
-			`${import.meta.env.VITE_API_URL}/auth/google/callback`,
+			`${import.meta.env.VITE_API_URL}/auth/google`,
 			"_self"
 		);
 	};
