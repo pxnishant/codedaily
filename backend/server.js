@@ -22,7 +22,7 @@ const PORT = process.env.PORT || 8080;
 const app = express()
 
 const store = new MongoDBStore({
-    uri: process.env.MONGO_URI,
+    uri: process.env.MONGODB_URI,
     collection: 'sessions'
   });
   
