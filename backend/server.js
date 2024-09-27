@@ -13,18 +13,17 @@ import mongoose from 'mongoose'
 import User from './database/User.js'
 import connectMongoDBSession from 'connect-mongodb-session';
 
+mongoose.connect(process.env.MONGODB_URI)   
+
 const MongoDBStore = connectMongoDBSession(session);
 
-
-
-mongoose.connect(process.env.MONGODB_URI)
 const PORT = process.env.PORT || 8080;
 const app = express()
 
 const store = new MongoDBStore({
     uri: process.env.MONGODB_URI,
     collection: 'sessions'
-  });
+});
   
 
 app.use(cors({
@@ -33,7 +32,7 @@ app.use(cors({
     credentials: true,
 }));
 
-app.set('trust proxy', 1)
+// app.set('trust proxy', 1)
 
 app.use(session({
   secret: 'dsdsds cat',
@@ -42,26 +41,11 @@ app.use(session({
   store: store,
   cookie: {
     maxAge: 365 * 24 * 60 * 60 * 1000,
-    secure: true,
+    // secure: true,
     sameSite: "none", 
-    httpOnly: true
+    // httpOnly: true
 }
 }))
-
-
-// app.set('trust proxy', 1)
-// app.use(
-//     cookieSession(
-//         {
-//             name: "session",
-//             keys: ["codedaily"],
-//             maxAge: 24 * 60 * 60 * 1000,
-//             secure: true,
-//             sameSite: 'None'
-//         }
-
-//     )
-// );
 
 app.use(passport.initialize());
 app.use(passport.session());
