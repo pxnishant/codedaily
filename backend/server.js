@@ -32,7 +32,7 @@ app.use(cors({
     credentials: true,
 }));
 
-// app.set('trust proxy', 1)
+app.set('trust proxy', 1)
 
 app.use(session({
   secret: 'dsdsds cat',
@@ -41,9 +41,9 @@ app.use(session({
   store: store,
   cookie: {
     maxAge: 365 * 24 * 60 * 60 * 1000,
-    // secure: true,
+    secure: true,
     sameSite: "none", 
-    // httpOnly: true
+    httpOnly: true
 }
 }))
 
