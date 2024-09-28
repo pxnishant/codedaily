@@ -14,7 +14,6 @@ router.get('/login/failure', (req, res) => {
 
 
 router.get("/login/success", (req, res) => {
-    console.log('is user attatched?', req.user);
     if (req.isAuthenticated) {
         res.status(200).json({
             user: req.user,

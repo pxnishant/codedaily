@@ -13,7 +13,7 @@ function App() {
 		try {
 			const url = `${import.meta.env.VITE_API_URL}/auth/login/success`;
 			const { data } = await axios.get(url, { withCredentials: true });
-			// console.log('the user is', data);
+			console.log('the user is', data);
 			setUser(data.user);
 		} catch (err) {
 			console.log(err);

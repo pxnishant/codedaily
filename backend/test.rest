@@ -1,7 +1,1 @@
-GET http://localhost:8080/getdata
-content-type: application/json
-
-{
-    "email": "ppnishant@gmail.com"
-}
-
+GET http://localhost:8080
