@@ -15,6 +15,7 @@ import connectMongoDBSession from 'connect-mongodb-session';
 import cron from 'node-cron';
 import moment from 'moment-timezone';
 import path from 'path'
+import leetcode from './leetcodeData.js'
 
 dotenv.config();
 mongoose.connect(process.env.MONGODB_URI)   
@@ -29,14 +30,6 @@ const store = new MongoDBStore({
     uri: process.env.MONGODB_URI,
     collection: 'sessions'
 });
-
-const leetcode = []
-fs.createReadStream('./leetcodeQ.csv')
-  .pipe(csv())
-  .on('data', (data) => leetcode.push(data))
-  .on('end', () => {
-  });
-  
 
 app.use(cors({
 
@@ -317,7 +310,7 @@ async function sendAll() {
 
 }
 
-cron.schedule('0 19 * * *', sendAll, {
+cron.schedule('15 19 * * *', sendAll, {
     scheduled: true,
     timezone: "Asia/Kolkata"
 });

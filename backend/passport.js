@@ -4,20 +4,12 @@ import dotenv from 'dotenv';
 import User from './database/User.js';
 import { Resend } from "resend";
 dotenv.config();
-import csv from 'csv-parser';
 import fs from 'fs';
 import path from 'path'
+import leetcode from './leetcodeData.js'
 
 const GoogleStrategy = gstrategy.Strategy;
 const resend = new Resend("re_LQxpSv4d_F21vmqvmdZcfRbdXzWDgQAGj");
-
-const leetcode = []
-fs.createReadStream('./leetcodeQ.csv')
-  .pipe(csv())
-  .on('data', (data) => leetcode.push(data))
-  .on('end', () => {
-  });
-  
 
 passport.use(
 
