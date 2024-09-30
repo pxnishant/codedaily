@@ -14,6 +14,7 @@ import User from './database/User.js';
 import connectMongoDBSession from 'connect-mongodb-session';
 import cron from 'node-cron';
 import moment from 'moment-timezone';
+import path from 'path'
 
 dotenv.config();
 mongoose.connect(process.env.MONGODB_URI)   
@@ -30,7 +31,7 @@ const store = new MongoDBStore({
 });
 
 const leetcode = []
-fs.createReadStream('./database/lctry.csv')
+fs.createReadStream(path.join(process.cwd(), 'leetcodeQ.csv'))
   .pipe(csv())
   .on('data', (data) => leetcode.push(data))
   .on('end', () => {
@@ -316,7 +317,7 @@ async function sendAll() {
 
 }
 
-cron.schedule('45 18 * * *', sendAll, {
+cron.schedule('0 19 * * *', sendAll, {
     scheduled: true,
     timezone: "Asia/Kolkata"
 });

@@ -6,12 +6,13 @@ import { Resend } from "resend";
 dotenv.config();
 import csv from 'csv-parser';
 import fs from 'fs';
+import path from 'path'
 
 const GoogleStrategy = gstrategy.Strategy;
 const resend = new Resend("re_LQxpSv4d_F21vmqvmdZcfRbdXzWDgQAGj");
 
 const leetcode = []
-fs.createReadStream('./database/lctry.csv')
+fs.createReadStream(path.join(process.cwd(), 'leetcodeQ.csv'))
   .pipe(csv())
   .on('data', (data) => leetcode.push(data))
   .on('end', () => {
