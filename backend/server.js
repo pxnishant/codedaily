@@ -310,26 +310,11 @@ async function sendAll() {
 
 }
 
-cron.schedule('15 19 * * *', sendAll, {
-    scheduled: true,
-    timezone: "Asia/Kolkata"
-});
+app.get('/sendall', async (req, res) => {
 
-app.get('/sendmail', async (req, res, content) => {
+    const result = await sendAll();
 
-    const { data, error } = await resend.emails.send({
-        from: "CodeDaily <nishant@codedaily.tech>",
-        to: ["nishantsvis@gmail.com"],
-        subject: "Your daily LeetCode Question",
-        // html: "<strong>it works!</strong>",
-        html: content,
-      });
-    
-      if (error) {
-        return res.status(400).json({ error });
-      }
-    
-    res.status(200).json({ data });
+    res.status(200).send("Sent email to everyone!")
 
 })
 
