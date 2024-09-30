@@ -31,7 +31,7 @@ const store = new MongoDBStore({
 });
 
 const leetcode = []
-fs.createReadStream(path.join(process.cwd(), 'leetcodeQ.csv'))
+fs.createReadStream('./leetcodeQ.csv')
   .pipe(csv())
   .on('data', (data) => leetcode.push(data))
   .on('end', () => {
