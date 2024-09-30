@@ -235,7 +235,7 @@ return (
             </div>
           )}
           {showPopup2 && (
-            <div className="retro-popup">
+            <div className="retro-popup" id ="popup2">
               <p>Not Saved! Choose both difficulty and topic.</p>
             </div>
           )}
