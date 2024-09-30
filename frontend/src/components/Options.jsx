@@ -30,11 +30,11 @@ export default function Options({difficulty, topics, handleOnChangeD, handleOnCh
     </div>
     <div>
       <input checked = {topics && topics[offset2 + 1]} onChange = {() => handleOnChangeT(offset2 + 1)} id="check-5" type="checkbox" />
-      <label for="check-5">Greedy</label>
+      <label for="check-5">Greedy / Binary Search</label>
     </div>
     <div>
       <input checked = {topics && topics[offset2 + 2]} onChange = {() => handleOnChangeT(offset2 + 2)} id="check-6" type="checkbox" />
-      <label for="check-6">Binary Search</label>
+      <label for="check-6">Strings</label>
     </div>
     <div>
       <input checked = {topics && topics[offset2 + 3]} onChange = {() => handleOnChangeT(offset2 + 3)} id="check-7" type="checkbox" />
@@ -54,7 +54,7 @@ export default function Options({difficulty, topics, handleOnChangeD, handleOnCh
     </div>
     <div>
       <input checked = {topics && topics[offset2 + 7]} onChange = {() => handleOnChangeT(offset2 + 7)} id="check-11" type="checkbox" />
-      <label for="check-11">Other Topics</label>
+      <label for="check-11">Math / Bit Manipulation</label>
     </div>
   </form>
   </div>
