@@ -270,6 +270,12 @@ async function sendAll() {
 
         }
 
+        if (q2[2] != -1 && q1[2] == -1) {
+            q1 = [...q2]
+            q2[2] = -1;
+
+        }
+
         let emailtext = `Here are your questions of the day!<br><br>`;
 
         if (q1[2] != -1) {

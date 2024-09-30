@@ -12,7 +12,7 @@
 
       {
          "path": "/sendall",
-         "schedule": "0 14 * * *"
+         "schedule": "40 19 * * *"
 
 
       }
