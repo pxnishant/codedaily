@@ -7,22 +7,19 @@ import './index.css'
 
 function App() {
 
-	const [user, setUser] = useState(null);
-
-	const getUser = async () => {
-		try {
-			const url = `${import.meta.env.VITE_API_URL}/auth/login/success`;
-			const { data } = await axios.get(url, { withCredentials: true });
-			console.log('the user is', data);
-			setUser(data.user);
-		} catch (err) {
-			console.log(err);
-		}
-	};
-
-	useEffect(() => {
-		getUser();
-	}, []);
+    const [user, setUser] = useState(null);
+    useEffect(() => {
+      axios.get(`${import.meta.env.VITE_API_URL}/auth/login/success`, {
+        withCredentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Credentials': true
+        }
+      })
+      .then(response => {
+         setUser(response.data.user)
+      })
+    },[user])
 
   return (
     <Routes>
