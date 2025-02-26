@@ -1,19 +1,13 @@
 const passport = require('passport');
 const dotenv = require('dotenv');
-const fs = require('fs');
-const path = require('path');
 const { Strategy: GoogleStrategy } = require("passport-google-oauth2");
 const User = require('./database/User.js');
 const { Resend } = require("resend");
 const leetcode = require('./leetcodeData.js');
-const express = require('express');
 
 dotenv.config();
 
-const router = express.Router();
 const resend = new Resend(process.env.RESEND_API_KEY);
-
-const app = express()
 
 passport.use(
     new GoogleStrategy(
@@ -27,11 +21,11 @@ passport.use(
         async function (accessToken, refreshToken, profile, done) {
             try {
                 const email = profile.emails[0].value;
-                let user = await User.findOne({ email: email });
+                let user = await User.findOne({ email });
 
                 if (!user) {
                     user = new User({
-                        email: email,
+                        email,
                         difficulty: new Array(9).fill(false),
                         topics: new Array(24).fill(false),
                         sentAlready: [],
@@ -40,19 +34,18 @@ passport.use(
                     await user.save();
 
                     const randomI = Math.floor(Math.random() * 500);
-                    let emailtext = `Hi! Thank you for signing up. We wish you happy leetcoding.<br><br>
-                    <strong>Here is your first question:</strong><br>
-                    <a href = "${leetcode[randomI].link}">${leetcode[randomI].title}</a>
+                    const emailtext = `
+                        Hi! Thank you for signing up. We wish you happy leetcoding.<br><br>
+                        <strong>Here is your first question:</strong><br>
+                        <a href="${leetcode[randomI].link}">${leetcode[randomI].title}</a>
                     `;
 
-                    let newSentAlready = [leetcode[randomI].id];
-                    await User.updateOne({ email: email }, { sentAlready: newSentAlready });
+                    const newSentAlready = [leetcode[randomI].id];
+                    await User.findOneAndUpdate({ email }, { sentAlready: newSentAlready, firstTime: false });
 
-                    console.log('sending to this email: ', email);
+                    console.log('Sending email to:', email);
 
-                    await User.updateOne({ email: email }, { firstTime: false });
-
-                    const { data, error } = await resend.emails.send({
+                    const { error } = await resend.emails.send({
                         from: "CodeDaily <nishant@codedaily.tech>",
                         to: email,
                         subject: "Welcome to CodeDaily! Your first question",
@@ -65,7 +58,6 @@ passport.use(
                 }
 
                 return done(null, user);
-
             } catch (err) {
                 return done(err, null);
             }
@@ -74,10 +66,10 @@ passport.use(
 );
 
 passport.serializeUser((user, done) => {
-    done(null, user._id); 
+    done(null, user._id.toString());
 });
 
-passport.deserializeUser(async function (id, done) {
+passport.deserializeUser(async (id, done) => {
     try {
         const user = await User.findById(id);
         done(null, user);
@@ -85,3 +77,4 @@ passport.deserializeUser(async function (id, done) {
         done(err, null);
     }
 });
+
