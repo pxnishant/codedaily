@@ -9,19 +9,15 @@ function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
+
     axios.get(`${import.meta.env.VITE_API_URL}/auth/login/success`, {
-      withCredentials: true, // ✅ Correct value
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Credentials': true
-      }
+      withCredentials: true, 
     })
     .then(response => {
       setUser(response.data.user);
     })
-    .catch(err => console.error(err));
+    .catch(err => console.error("Login Error:", err));
   }, []);
-
   return (
     <Routes>
       <Route path="/" element={user ? <AfterLogin user={user} /> : <BeforeLogin />} />
