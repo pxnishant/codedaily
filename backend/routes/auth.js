@@ -14,7 +14,7 @@ router.get('/login/failure', (req, res) => {
 
 
 router.get("/login/success", (req, res) => {
-    if (req.isAuthenticated) {
+    if (req.isAuthenticated()) {
         res.status(200).json({
             user: req.user,
         });
