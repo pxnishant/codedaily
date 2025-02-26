@@ -38,7 +38,7 @@ app.use(cors({
 
     origin: process.env.CLIENT_URL,
     methods: "GET,POST,PUT,PATCH,DELETE,OPTIONS",
-    allowedHeaders: ['Content-Type', 'Access-Control-Allow-Credentials', 'Authorization'],
+    allowedHeaders: ['Content-Type', 'Access-Control-Allow-Credentials', 'Authorization', 'X-Correlation-ID'],
     credentials: true,
 
 }));
@@ -48,6 +48,11 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     store: store,
+    cookie: {
+        secure: process.env.NODE_ENV === "production",
+        httpOnly: true, 
+        sameSite: "lax"
+    }
 }));
 
 app.use(passport.initialize());
