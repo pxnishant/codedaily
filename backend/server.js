@@ -1,21 +1,23 @@
-import express from 'express'
-import dotenv from 'dotenv';
-import cookieSession from 'cookie-session';
-import session from 'express-session';
-import passport from 'passport';
-import cors from 'cors'
-import authRoute from "./routes/auth.js"
-import { Resend } from "resend";
-import csv from 'csv-parser';
-import fs from 'fs';
-import passportStrategy from "./passport.js";
-import mongoose from 'mongoose';
-import User from './database/User.js';
-import connectMongoDBSession from 'connect-mongodb-session';
-import cron from 'node-cron';
-import moment from 'moment-timezone';
-import path from 'path'
-import leetcode from './leetcodeData.js'
+const express = require("express");
+const dotenv = require("dotenv");
+const session = require("express-session");
+const passport = require("passport");
+const cors = require("cors");
+const authRoutes = require("./auth.js");
+const { Resend } = require("resend");
+const csv = require("csv-parser");
+const fs = require("fs");
+const mongoose = require("mongoose");
+const User = require("./database/User.js");
+const connectMongoDBSession = require("connect-mongodb-session");
+const cron = require("node-cron");
+const moment = require("moment-timezone");
+const path = require("path");
+const leetcode = require("./leetcodeData.js");
+
+require("./passport.js");
+
+const app = express();
 
 dotenv.config();
 mongoose.connect(process.env.MONGODB_URI)   
@@ -23,46 +25,35 @@ mongoose.connect(process.env.MONGODB_URI)
 const MongoDBStore = connectMongoDBSession(session);
 
 const PORT = process.env.PORT || 8080;
-const app = express()
-const resend = new Resend("re_LQxpSv4d_F21vmqvmdZcfRbdXzWDgQAGj");
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 const store = new MongoDBStore({
     uri: process.env.MONGODB_URI,
-    collection: 'sessions'
+    collection: "sessionsv2",
 });
+
+app.use(express.json());
 
 app.use(cors({
 
     origin: process.env.CLIENT_URL,
     methods: "GET,POST,PUT,PATCH,DELETE,OPTIONS",
+    allowedHeaders: ['Content-Type', 'Access-Control-Allow-Credentials', 'Authorization'],
     credentials: true,
 
 }));
 
-app.set('trust proxy', (process.env.NODE_ENV === 'production'))
-
 app.use(session({
-
-  secret: process.env.SESSION_SECRET || 'i like cats & they like me',
-  resave: false,
-  saveUninitialized: true,
-  store: store,
-  cookie: {
-    maxAge: 365 * 24 * 60 * 60 * 1000,
-    secure: (process.env.NODE_ENV === 'production'),
-    sameSite: process.env.NODE_ENV === 'production' ? "none" : "lax", 
-    httpOnly: (process.env.NODE_ENV == 'production')
-    }
-}))
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: store,
+}));
 
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-app.use(express.json());
-
-app.use("/auth", authRoute)
-
+app.use('/auth', authRoutes)
 app.get('/getdata', async (req, res) => {
 
     const count = await User.countDocuments({ email: req.headers.email });

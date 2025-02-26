@@ -2,7 +2,6 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -14,7 +13,6 @@
   "license": "ISC",
   "dependencies": {
     "connect-mongodb-session": "^5.0.0",
-    "cookie-session": "^2.1.0",
     "cors": "^2.8.5",
     "csv-parser": "^3.0.0",
     "dotenv": "^16.4.5",
@@ -26,6 +24,7 @@
     "node-cron": "^3.0.3",
     "nodemon": "^3.1.7",
     "passport": "^0.5.3",
+    "passport-google-oauth2": "^0.2.0",
     "passport-google-oauth20": "^2.0.0",
     "passport-vercel": "^1.0.0",
     "resend": "^4.0.0"

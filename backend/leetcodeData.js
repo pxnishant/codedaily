@@ -4492,4 +4492,4 @@ const leetcode = [
   }
 ];
 
-export default leetcode;
+module.exports = leetcode;
