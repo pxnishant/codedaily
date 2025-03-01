@@ -4,9 +4,9 @@ import Header from './Header';
 import './Popup.css'
 
 
-export default function AfterLogin(userDetails) {
+export default function AfterLogin(email) {
 
-  const user = userDetails.user;
+  const user = {email: email};
 
   console.log('printing user after login', user);
 

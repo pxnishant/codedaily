@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const authRoutes = require("./routers/authRoutes.js");
 const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser");
 
 const mainRoutes = require("./routers/mainRoutes.js");
 
@@ -22,12 +23,14 @@ connectDB()
 const PORT = process.env.PORT || 8080;
 
 app.use(express.json());
+app.use(cookieParser());
 
 app.use(cors({
     origin: process.env.CLIENT_URL,
     methods: "GET,POST,PUT,PATCH,DELETE,OPTIONS",
-    allowedHeaders: ['Content-Type', 'Access-Control-Allow-Credentials', 'Authorization', 'X-Correlation-ID'],
-    credentials: true }));
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Correlation-ID', 'Set-Cookie'],
+    credentials: true 
+}));
 
 app.use('/auth', authRoutes)
 app.use('/', mainRoutes)  

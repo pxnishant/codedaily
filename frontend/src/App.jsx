@@ -6,21 +6,25 @@ import BeforeLogin from './components/BeforeLogin.jsx';
 import './index.css';
 
 function App() {
-  const [user, setUser] = useState(null);
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [email, setEmail] = useState("");
+
 
   useEffect(() => {
-
-    axios.get(`${import.meta.env.VITE_API_URL}/auth/login/success`, {
-      withCredentials: true, 
+    fetch(`${import.meta.env.VITE_API_URL}/auth/checkLogin/`, { credentials: "include" })
+      .then((res) => res.json())
+      .then((data) => {
+        setIsLoggedIn(data.isAuthenticated)
+        // setEmail(data)
+        console.log("dataaaa---------------------: ", data)
     })
-    .then(response => {
-      setUser(response.data.user);
-    })
-    .catch(err => console.error("Login Error:", err));
+      .catch((err) => console.error(err));
   }, []);
+
   return (
     <Routes>
-      <Route path="/" element={user ? <AfterLogin user={user} /> : <BeforeLogin />} />
+      <Route path="/" element={isLoggedIn ? <AfterLogin email={email} /> : <BeforeLogin />} />
     </Routes>
   );
 }

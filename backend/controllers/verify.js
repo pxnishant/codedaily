@@ -32,14 +32,13 @@ module.exports = async (req, res) => {
 
             const authToken = jwt.sign( { email: decoded.email }, process.env.JWT_SECRET, { expiresIn: '30d' });
 
-            res.cookie('auth', authToken, {
+            res.cookie('authToken', authToken, {
                 httpOnly: true,
-                secure: false,
+                secure: process.env.STATUS == 'production',
                 maxAge: 30 * 24 * 60 * 60 * 1000
             });
 
-
-            return res.send(`Logged in Successfully!`);
+            return res.redirect(process.env.CLIENT_URL);
         });
         
     }

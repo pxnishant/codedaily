@@ -4,7 +4,7 @@ const { Resend } = require('resend')
 require('dotenv').config()
 
 const backendURL = process.env.STATUS == 'production' ? process.env.VERCEL_PROJECT_PRODUCTION_URL : process.env.HOST
-
+const protocol = process.env.STATUS == 'production' ? "https" : "http"
 
 module.exports = async (req, res) => {
     
@@ -24,7 +24,7 @@ module.exports = async (req, res) => {
         console.log("Added token to DB successfully.")
         try {
 
-            const magicLink = `https://${backendURL}/auth/verify?token=${token}`
+            const magicLink = `${protocol}://${backendURL}/auth/verify?token=${token}`
 
             emailtext = `
                         <div style="max-width: 600px; margin: 20px auto; background-color: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
@@ -32,7 +32,7 @@ module.exports = async (req, res) => {
                         <p>Hi there,</p>
                         <p>Please click <a href = "${magicLink}">here</a> to authenticate yourself.
                         <p>This link will expire in 15 minutes. As long as you're on the same browser, you will automatically be logged in when you click.</p>
-                        <p>Thank you,<br>Codeforces Notes</p>
+                        <p>Thank you,<br>CodeDaily</p>
                         </div>
                         </div>
                         `
