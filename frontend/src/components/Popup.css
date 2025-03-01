@@ -26,6 +26,13 @@
     min-height: 60px;
   }
 
+  #popup3 {
+    min-width: 500px;
+    transform: translate(-50%, -50%); 
+    top: 8%;
+  }
+
+
   @keyframes fadeIn {
     from {
       opacity: 0;

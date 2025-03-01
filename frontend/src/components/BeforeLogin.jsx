@@ -14,9 +14,8 @@ function BeforeLogin() {
           <Faq title = "Is it free?" content = "It's absolutely free. I'm also working on integrating Codeforces, it will be available soon."/>
         </div>
         <div className='auth'>
-        <div className="title">Your email is safe with us.<br/></div>
-          <Login title = "Login using Google →"/>
-          <Signup title = "Sign up with Google"/>
+        <div className="title">Login to grind<br/></div>
+          <Login title = "Login"/>
         </div>
       </div>
     </main>

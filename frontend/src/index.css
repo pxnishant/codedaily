@@ -92,6 +92,24 @@ main {
   flex-direction: column;
 }
 
+.login {
+  border-radius: 5px;
+  border: 2px solid var(--main-color);
+  box-shadow: 4px 4px var(--main-color);
+  background-color: #D8D2C2;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--font-color);
+  cursor: pointer;
+  padding: 10px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+textarea:focus, input:focus{
+  outline: none;
+}
+
 .lg-bt, .sg-bt, .add-bt, .sv-bt, .lgo-bt {
   border-radius: 5px;
   border: 2px solid var(--main-color);
@@ -111,18 +129,23 @@ main {
 
 }
 
-.lg-bt:hover, .sg-bt:hover, .add-bt:hover, .sv-bt:hover, .lgo-bt:hover {
+.lg-bt:hover, .sg-bt:hover, .add-bt:hover, .sv-bt:hover, .lgo-bt:hover .login {
   cursor: pointer;
   background-color: var(--lb);
   
 }
 
 
+.lg-bt {
+  width: 30%;
+  
+}
+
 
 .title {
   color: var(--gray-12);
   font-weight: 700;
-  font-size: 20px;
+  font-size: 23px;
   margin-bottom: 15px;
   text-align: center;
   color: var(--main-color);
@@ -146,6 +169,8 @@ main {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  text-align: center;
+
 
 }
 
@@ -268,4 +293,20 @@ main {
     width: 50%;
   }
 
+}
+
+.loader {
+  border: 3px solid #f3f3f3; /* Light gray */
+  border-top: 3px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
