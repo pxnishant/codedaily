@@ -29,7 +29,7 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Access-Control-Allow-Credentials', 'Authorization', 'X-Correlation-ID'],
     credentials: true }));
 
-// app.use('/auth', authRoutes)
+app.use('/auth', authRoutes)
 app.use('/', mainRoutes)  
 
 app.listen(PORT, () => console.log(`Server running, port: ${PORT}`))

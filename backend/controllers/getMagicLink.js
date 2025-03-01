@@ -24,7 +24,7 @@ module.exports = async (req, res) => {
         console.log("Added token to DB successfully.")
         try {
 
-            const magicLink = `https://${backendURL}/api/auth/verify?token=${token}`
+            const magicLink = `https://${backendURL}/auth/verify?token=${token}`
 
             emailtext = `
                         <div style="max-width: 600px; margin: 20px auto; background-color: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
@@ -36,11 +36,11 @@ module.exports = async (req, res) => {
                         </div>
                         </div>
                         `
-
-            const resend = new Resend(process.env.RESENT_API_KEY);
+            console.log("Resend key: ", process.env.RESEND_KEY)
+            const resend = new Resend(process.env.RESEND_KEY);
 
             const { data, error } = await resend.emails.send({
-                from: "Codedaily <nishant@codedaily.tech>",
+                from: "CodeDaily <nishant@codedaily.tech>",
                 to: email,
                 subject: "Login link for CodeDaily",
                 html: emailtext,
