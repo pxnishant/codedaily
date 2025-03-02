@@ -30,7 +30,8 @@ module.exports = async (req, res) => {
                         <div style="max-width: 600px; margin: 20px auto; background-color: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
                         <div style="padding: 20px; color: #333333; line-height: 1.6; font-size: 16px;">
                         <p>Hi there,</p>
-                        <p>Please click <a href = "${magicLink}">here</a> to authenticate yourself.
+                        <p>Please click <a href = "${magicLink}">here</a>, or copy paste the following link in your browser:<br></p>
+                        <a href = "${magicLink}">${magicLink}</a><br>
                         <p>This link will expire in 15 minutes. As long as you're on the same browser, you will automatically be logged in when you click.</p>
                         <p>Thank you,<br>CodeDaily</p>
                         </div>

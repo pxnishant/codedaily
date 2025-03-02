@@ -67,7 +67,7 @@ export default function Login({ title }) {
 
       {message && (
         <div className="retro-popup" id="popup3">
-          <p>{message}</p>
+          <p id = "loginpop">{message}</p>
         </div>
       )}
     </div>
