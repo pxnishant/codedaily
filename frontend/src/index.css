@@ -53,6 +53,11 @@ html, body, #root {
 
 }
 
+.subtitle {
+  font-style: italic;
+  font-size: 12px;
+}
+
 .logo:hover {
 
   background-color: var(--lb);

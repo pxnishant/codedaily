@@ -6,6 +6,8 @@ module.exports = async (req, res) => {
 
         const { email, difficulty, topics } = req.body;
 
+        console.log("req body", req.body)
+
         const count = await User.countDocuments({ email: email });
 
         if (count === 0) {

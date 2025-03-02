@@ -14,8 +14,9 @@ function BeforeLogin() {
           <Faq title = "Is it free?" content = "It's absolutely free. I'm also working on integrating Codeforces, it will be available soon."/>
         </div>
         <div className='auth'>
-        <div className="title">Login to grind<br/></div>
-          <Login title = "Login"/>
+        <div className="title">Login / Signup<br/></div>
+          <Login title = "Send"/><br/>
+        <div className="subtitle">We'll send you a login link<br/></div>
         </div>
       </div>
     </main>

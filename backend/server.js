@@ -5,7 +5,9 @@ const authRoutes = require("./routers/authRoutes.js");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 
+
 const mainRoutes = require("./routers/mainRoutes.js");
+const authMW = require("./middlewares/authMW.js");
 
 const app = express();
 dotenv.config();
@@ -22,15 +24,16 @@ connectDB()
 
 const PORT = process.env.PORT || 8080;
 
-app.use(express.json());
-app.use(cookieParser());
 
 app.use(cors({
-    origin: process.env.CLIENT_URL,
+    origin: process.env.CLIENT_URL,  
     methods: "GET,POST,PUT,PATCH,DELETE,OPTIONS",
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Correlation-ID', 'Set-Cookie'],
-    credentials: true 
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'X-Correlation-ID', 'email'],
+    credentials: true  
 }));
+
+app.use(express.json());
+app.use(cookieParser())
 
 app.use('/auth', authRoutes)
 app.use('/', mainRoutes)  

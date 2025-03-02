@@ -31,14 +31,8 @@ module.exports = async (req, res) => {
             }
 
             const authToken = jwt.sign( { email: decoded.email }, process.env.JWT_SECRET, { expiresIn: '30d' });
-
-            res.cookie('authToken', authToken, {
-                httpOnly: true,
-                secure: process.env.STATUS == 'production',
-                maxAge: 30 * 24 * 60 * 60 * 1000
-            });
-
-            return res.redirect(process.env.CLIENT_URL);
+            console.log("email??", decoded.email)
+            return res.redirect(`${process.env.CLIENT_URL}/?token=${authToken}`);
         });
         
     }
