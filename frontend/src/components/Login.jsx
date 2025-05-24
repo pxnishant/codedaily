@@ -1,75 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React from 'react'
 
-export default function Login({ title }) {
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [loading, setLoading] = useState(false); 
-
-  const handleChange = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const validateEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
-  const loginClick = async (email) => {
-    if (!validateEmail(email)) {
-      setMessage("Invalid email, please re-enter");
-      return;
-    }
-
-    setLoading(true);
-
-    fetch(`${import.meta.env.VITE_API_URL}/auth/getMagicLink/${email}`, {
-      method: "GET",
-    })
-      .then(() => {
-        setMessage("Please check your email!");
-      })
-      .catch(() => {
-        setMessage("Something went wrong!");
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
-
-  useEffect(() => {
-    if (message) {
-      const timer = setTimeout(() => {
-        setMessage("");
-      }, 3000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [message]);
-
-  const handleKeyDown = (event) => {
-    if (event.key === "Enter") {
-      loginClick(email);
-    }
-  };
-
+export default function Login() {
   return (
-    <div className="login-div">
-      <input
-        className="login"
-        placeholder="Email"
-        onChange={handleChange}
-        onKeyDown={handleKeyDown}
-      />
-
-      <button className="lg-bt" onClick={() => loginClick(email)} disabled={loading}>
-        {loading ? <div className="loader"></div> : title}
-      </button>
-
-      {message && (
-        <div className="retro-popup" id="popup3">
-          <p id = "loginpop">{message}</p>
+    <div className='md:mr-[10%] bg-zinc-800 h-full flex flex-col p-6 rounded-lg border-1 border-zinc-700 items-center shadow-xl gap-10 md:w-40/100 md:max-h-80 w-70/100 md:max-w-90'>
+        <h1 className='text-3xl font-semibold'>
+            Sign In<br/>
+        </h1>
+        <input placeholder='Enter your email' className='focus:outline-none rounded-sm border-zinc-700 border-2 w-19/20 h-10 px-3'></input>
+        <button className='hover: cursor-pointer transition-transform duration-300 ease-in-out hover:translate-y-1 bg-blue-600 text-white rounded    bg-stone-100 text-zinc-700 w-25 h-10 rounded-lg font-bold'>Login</button>
+        <h4 className='text-sm text-zinc-400'><i>We'll send you a login link!</i></h4>
         </div>
-      )}
-    </div>
-  );
+  )
 }
