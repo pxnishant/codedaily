@@ -7,14 +7,13 @@ export default function HomePostLogin() {
   const [problemsData, setProblemsData] = useState([])
   const [saveStatus, setSaveStatus] = useState("idle")
 
-  const protocol = import.meta.env.VITE_PROTOCOL;
   const backendURL = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     const token = localStorage.getItem("token")
 
     if (token) {
-      const url = `${protocol}${backendURL}/getData`
+      const url = `${backendURL}/getData`
 
       fetch(url, {
         method: 'GET',
@@ -62,7 +61,7 @@ export default function HomePostLogin() {
   
     setSaveStatus("saving");
   
-    const url = `${protocol}${backendURL}/updateProblems`;
+    const url = `${backendURL}/updateProblems`;
   
     fetch(url, {
       method: 'POST',
@@ -140,6 +139,10 @@ export default function HomePostLogin() {
             }`}>{saveStatus === "saved" ? "Saved ✓" : saveStatus === "saving" ? "Saving..." : "Save"}</button>
 
        </div>
+
+       <button className='pt-5 rounded-sm italic hover: transition-transform duration-300 ease-in-out hover:translate-y-1'>
+          Problems are sent on email around 11:00 IST
+        </button>
       </div>
     </div>
   )

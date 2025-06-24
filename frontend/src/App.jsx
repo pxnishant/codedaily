@@ -9,7 +9,6 @@ function AppContent() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  const protocol = import.meta.env.VITE_PROTOCOL;
   const backendURL = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
