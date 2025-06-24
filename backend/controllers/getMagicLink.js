@@ -3,9 +3,6 @@ const Auth = require('../database/authSchema')
 const { Resend } = require('resend')
 require('dotenv').config()
 
-const backendURL = process.env.STATUS == 'production' ? "codedaily.vercel.app" : process.env.SERVER_URL
-const protocol = process.env.STATUS == 'production' ? "https" : "http"
-
 module.exports = async (req, res) => {
     
     const email = req.params.email;
@@ -24,7 +21,7 @@ module.exports = async (req, res) => {
         console.log("Added token to DB successfully.")
         try {
 
-            const magicLink = `${protocol}://${backendURL}/auth/verify?token=${token}`
+            const magicLink = `${process.env.SERVER_URL}/auth/verify?token=${token}`
 
             emailtext = `
                         <div style="max-width: 600px; margin: 20px auto; background-color: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
@@ -37,7 +34,6 @@ module.exports = async (req, res) => {
                         </div>
                         </div>
                         `
-            console.log("Resend key: ", process.env.RESEND_KEY)
             const resend = new Resend(process.env.RESEND_KEY);
 
             const { data, error } = await resend.emails.send({

@@ -8,8 +8,6 @@ module.exports = async (req, res) => {
     const token = req.query.token
     console.log("Token received: ", token)
 
-    const protocol = (process.env.STATUS == 'dev') ? "http://" : "https://"
-
     if (!token) {
         return res.status(401).send(`No Token recieved.`)
     }
@@ -29,8 +27,7 @@ module.exports = async (req, res) => {
     
         const authToken = jwt.sign({ email: decoded.email }, process.env.JWT_SECRET, { expiresIn: '30d' });
     
-        console.log("email??", decoded.email);
-        return res.redirect(`${protocol}${process.env.CLIENT_URL}/?token=${authToken}`);
+        return res.redirect(`${process.env.CLIENT_URL}/?token=${authToken}`);
     
     } catch (err) {
         console.error("Error during verification: ", err);
