@@ -1,25 +1,25 @@
 const User = require("../database/User.js");
 
 module.exports = async (req, res) => {
+    try {
+        console.log("Getting data for:", req.query.email);
 
-    console.log("getting data", req.query.email)
-    const count = await User.countDocuments({ email: req.query.email });
-    
-    if (count != 0) {
-        const curr = await User.findOne({email : req.query.email});
-        return res.status(200).json(curr);
-    }
+        const existingUser = await User.findOne({ email: req.query.email });
 
-    else {
-        await User.create({
+        if (existingUser) {
+            return res.status(200).json(existingUser);
+        }
+
+        const newUser = await User.create({
             email: req.query.email,
-            difficulty: new Array(9).fill(false),
-            topics: new Array(24).fill(false)
+            problems: [],
+            sent: []
         });
-        const curr = await User.findOne({email : req.query.email});
-        return res.status(200).json(curr);
+
+        return res.status(200).json(newUser);
+        
+    } catch (error) {
+        console.error("Error in getUser:", error);
+        return res.status(500).json({ error: "Internal Server Error" });
     }
-
-    
-
 }

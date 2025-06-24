@@ -8,38 +8,33 @@ module.exports = async (req, res) => {
     const token = req.query.token
     console.log("Token received: ", token)
 
+    const protocol = (process.env.STATUS == 'dev') ? "http://" : "https://"
+
     if (!token) {
         return res.status(401).send(`No Token recieved.`)
     }
 
     try {
-
-        jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
-
-            if (err) {
-                return res.status(403).send(`${err}`)
-            }
-        
-            const userInDB = await Auth.findOne( { email: decoded.email } )
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
     
-            if (!userInDB) {
-                return res.status(404).send(`User not found.`);
-            }
+        const userInDB = await Auth.findOne({ email: decoded.email });
     
-            if (userInDB.token != token) {
-                return res.status(403).send(`Token Expired.`);
-            }
-
-            const authToken = jwt.sign( { email: decoded.email }, process.env.JWT_SECRET, { expiresIn: '30d' });
-            console.log("email??", decoded.email)
-            return res.redirect(`${process.env.CLIENT_URL}/?token=${authToken}`);
-        });
-        
+        if (!userInDB) {
+            return res.status(404).send(`User not found.`);
+        }
+    
+        if (userInDB.token !== token) {
+            return res.status(403).send(`Token expired.`);
+        }
+    
+        const authToken = jwt.sign({ email: decoded.email }, process.env.JWT_SECRET, { expiresIn: '30d' });
+    
+        console.log("email??", decoded.email);
+        return res.redirect(`${protocol}${process.env.CLIENT_URL}/?token=${authToken}`);
+    
+    } catch (err) {
+        console.error("Error during verification: ", err);
+        return res.status(403).send(`Invalid or expired token.`);
     }
     
-    catch (error) {
-        console.error("Error during verification: ", error);
-        return res.status(500).json({ error: 'Internal server error.' });
-    }
-
 }

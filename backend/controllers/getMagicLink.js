@@ -3,7 +3,7 @@ const Auth = require('../database/authSchema')
 const { Resend } = require('resend')
 require('dotenv').config()
 
-const backendURL = process.env.STATUS == 'production' ? "codedaily.vercel.app" : process.env.HOST
+const backendURL = process.env.STATUS == 'production' ? "codedaily.vercel.app" : process.env.SERVER_URL
 const protocol = process.env.STATUS == 'production' ? "https" : "http"
 
 module.exports = async (req, res) => {
