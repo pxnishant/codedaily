@@ -2,7 +2,7 @@ import React from 'react'
 import TopicSelector from './TopicSelector'
 import Difficulty from './Difficulty'
 
-export default function Problem({ id, handleDifficulty, handleTags, onClose, index }) {
+export default function Problem({ id, handleDifficulty, handleTags, onClose, index, valueTags, valueDiff }) {
   return (
     <div className='relative w-3/5 min-w-80 p-5 md:p-10 bg-zinc-800 h-full flex flex-col rounded-lg border border-zinc-700 shadow-xl'>
       
@@ -21,12 +21,12 @@ export default function Problem({ id, handleDifficulty, handleTags, onClose, ind
         Difficulty
       </h1>
 
-      <Difficulty handleDifficulty={handleDifficulty} />
+      <Difficulty valueDiff = { valueDiff } handleDifficulty = { handleDifficulty } />
 
       <h1 className='text-md font-semibold pb-2'>
         Add Tags
       </h1>
-      <TopicSelector handleTags={handleTags} />
+      <TopicSelector valueTags = { valueTags } handleTags={handleTags} />
     </div>
   )
 }

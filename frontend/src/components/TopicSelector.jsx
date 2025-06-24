@@ -6,7 +6,7 @@ import makeAnimated from 'react-select/animated';
 const animatedComponents = makeAnimated();
 import Select from 'react-select'
 
-const TopicSelector = ({ handleTags }) => {
+const TopicSelector = ({ handleTags, valueTags }) => {
 
     const options = [
         { value: 'Arrays', label: 'Arrays' },
@@ -24,6 +24,7 @@ const TopicSelector = ({ handleTags }) => {
                 components={animatedComponents}
                 isMulti = {true}
                 onChange={handleTags}
+                value = { valueTags }
                 options = {options} className = 'text-zinc-800 min-w-65 w-[100%]'/>
        
         </div>

@@ -6,7 +6,7 @@ import makeAnimated from 'react-select/animated';
 const animatedComponents = makeAnimated();
 
 
-export default function Difficulty( { handleDifficulty } ) {
+export default function Difficulty( { handleDifficulty, valueDiff } ) {
     const options = [
         { value: 'Easy', label: 'Easy' },
         { value: 'Medium', label: 'Medium' },
@@ -22,6 +22,7 @@ export default function Difficulty( { handleDifficulty } ) {
                 components={animatedComponents}
                 isMulti = {true}
                 onChange={handleDifficulty}
+                value = { valueDiff } 
                 options = {options} className = 'text-zinc-800 min-w-65 w-[100%]'/>
        
         </div>
