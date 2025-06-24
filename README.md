@@ -20,42 +20,11 @@ ___
 
 <h4>Features</h4>
 
-`1` Retro interface
+`1` Dark-mode UI
 
-`2` Login / Signup via Google
+`2` Passwordless Login / Signup
 
-`3` You receive an email with a welcome question the moment you signup
+`3` Choose as many questions as you want on any tag or difficulty that exists on Leetcode
 
-`3` Can choose up upto 3 questions daily (only 3 due to limitations of my email service)
-
-`4` Can choose difficulty and topics for each question individually
-
-`5` Each question is a valuable question, as it has been randomly picked from the 500 most liked LeetCode questions.
+`5` Questions have been picked among the 500 most-liked problems on Leetcode
 ____
-
-<h4>Installation</h4>
-
-`1` Make a .env file inside `/frontend`, insert the following values:
-```
-VITE_API_URL = Backend URL (e.g. http://localhost:8080)
-```
-
-`2` Make a .env file inside `/backend`, insert the following values:
-```
-CLIENT_ID = Google Console Client ID (For Google Authentication)
-CLIENT_SECRET = Google Console Client Secret
-CLIENT_URL = Frontend URL (e.g. http://localhost:5173)
-NODE_ENV = Use `dev` for development, `production` if you're deploying
-MONGODB_URI = Database URL
-SESSION_SECRET = Generate & enter a random key for secure authentication (this value is not necessary)
-```
-`3` In terminal, do `npm run dev` at `/backend`
-  
-`4` In terminal, do `npm run dev` at `/frontend`
-___
-
-<h4>Known Issues</h4>
-
-`There is currently no option to unsubscribe`
-
-This was simply a lack of foresight. I will add it as soon as I get time.
